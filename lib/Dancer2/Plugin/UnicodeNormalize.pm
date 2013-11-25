@@ -111,7 +111,7 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<DANCER2>
+L<Dancer2>
 
 L<Unicode::Normalize>
 
