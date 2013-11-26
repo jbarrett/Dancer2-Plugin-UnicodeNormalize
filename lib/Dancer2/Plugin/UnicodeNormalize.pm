@@ -69,8 +69,9 @@ L</"CONFIGURATION">.
 This plugin was inspired by L<Mojolicious::Plugin::UnicodeNormalize>. For
 information on why Unicode Normalization is important, please see:
 
-http://www.perl.com/pub/2012/05/perlunicookbook-unicode-normalization.html
-http://www.modernperlbooks.com/mt/2013/11/mojolicious-unicode-normalization-plugin-released.html
+L<http://www.perl.com/pub/2012/05/perlunicookbook-unicode-normalization.html>
+
+L<http://www.modernperlbooks.com/mt/2013/11/mojolicious-unicode-normalization-plugin-released.html>
 
 =head1 CONFIGURATION
 
