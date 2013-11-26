@@ -1,10 +1,10 @@
+use strict;
+use warnings;
+
 package Dancer2::Plugin::UnicodeNormalize;
 {
     $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.01';
 }
-
-use strict;
-use warnings;
 
 use Dancer2;
 use Dancer2::Plugin;
@@ -48,7 +48,7 @@ __END__
 
 =head1 NAME
 
-Dancer2::Plugin::UnicodeNormalize - normalize incoming Unicode parameters
+Dancer2::Plugin::UnicodeNormalize - Normalize incoming Unicode parameters
 
 =head1 VERSION
 
