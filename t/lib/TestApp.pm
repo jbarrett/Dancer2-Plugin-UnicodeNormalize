@@ -13,3 +13,8 @@ post '/' => sub {
     return ( ( param('string1') eq param('string2') ) ? 'eq' : 'ne' );
 };
 
+post '/upload' => sub {
+    my ($file1, $file2) = (upload('file1'), upload('file2'));
+    return ( ( $file1->content eq $file2->content ) ? 'eq' : 'ne' );
+}
+
