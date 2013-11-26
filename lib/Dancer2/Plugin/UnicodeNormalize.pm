@@ -3,7 +3,7 @@ use warnings;
 
 package Dancer2::Plugin::UnicodeNormalize;
 {
-    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.01';
+    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.02';
 }
 
 use Dancer2;
@@ -31,7 +31,7 @@ on_plugin_import {
                 for (qw/query body route/) {
                     my $p = $dsl->request->params($_);
                     next unless $p;
-                    %{$p} = map { $_ => $normalizer->($p->{$_}) } keys $p;
+                    %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys $p;
                 }
                 $dsl->request->_build_params;
             },

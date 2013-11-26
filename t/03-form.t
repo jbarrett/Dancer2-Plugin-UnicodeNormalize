@@ -11,11 +11,6 @@ use Encode;
 
 t::lib::TestApp::config->{'charset'} = 'UTF-8';
 
-my $builder = Test::More->builder;
-binmode $builder->output,         ":utf8";
-binmode $builder->failure_output, ":utf8";
-binmode $builder->todo_output,    ":utf8";
-
 my $string = "\N{OHM SIGN}\N{GREEK CAPITAL LETTER OMEGA}\N{LATIN CAPITAL LETTER A}\N{COMBINING ACUTE ACCENT}\N{LATIN CAPITAL LETTER A WITH ACUTE}\N{LATIN SMALL LETTER LONG S WITH DOT ABOVE}\N{COMBINING DOT BELOW}";
 
 t::lib::TestApp::config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFD';

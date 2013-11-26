@@ -22,5 +22,9 @@ get '/form/:string' => sub {
     return param('string');
 };
 
+get '/optional/:string?' => sub {
+    return 'success';
+};
+
 1;
 
