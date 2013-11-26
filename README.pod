@@ -20,7 +20,7 @@ silently before processing each route. By default, we use Unicode Normalization
 Form C - this is usually what you want. Other forms can be selected, see:
 L</"CONFIGURATION">.
 
-This plugin was inspired by L<Mojolicious::Plugin::UnicodeNormalize>. For more
+This plugin was inspired by L<Mojolicious::Plugin::UnicodeNormalize>. For
 information on why Unicode Normalization is important, please see:
 
 http://www.perl.com/pub/2012/05/perlunicookbook-unicode-normalization.html

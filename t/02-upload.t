@@ -11,6 +11,8 @@ use Encode;
 use FindBin;
 use Digest::MD5 qw/md5/;
 
+t::lib::TestApp::config->{'charset'} = 'UTF-8';
+
 my $files = "$FindBin::Bin/files";
 
 open my $f1, '<:utf8', "${files}/1.txt";
