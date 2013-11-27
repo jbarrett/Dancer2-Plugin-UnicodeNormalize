@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use utf8;
+use charnames ':full';
 
 use Test::More tests => 3;
 use t::lib::TestApp;

@@ -3,7 +3,7 @@ use warnings;
 
 package Dancer2::Plugin::UnicodeNormalize;
 {
-    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.02';
+    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.03';
 }
 
 use Dancer2;
@@ -31,7 +31,7 @@ on_plugin_import {
                 for (qw/query body route/) {
                     my $p = $dsl->request->params($_);
                     next unless $p;
-                    %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys $p;
+                    %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys %{$p};
                 }
                 $dsl->request->_build_params;
             },
@@ -52,11 +52,11 @@ Dancer2::Plugin::UnicodeNormalize - Normalize incoming Unicode parameters
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =head1 SYNOPSIS
 
-    use Dancer2::Plugin::UnicodeNormalize
+    use Dancer2::Plugin::UnicodeNormalize;
 
 =head1 DESCRIPTION
 
@@ -92,13 +92,13 @@ John Barrett, <john@jbrt.org>
 
 =head1 CONTRIBUTING
 
-http://github.com/jbarrett/Dancer2-Plugin-UnicodeNormalize
+L<http://github.com/jbarrett/Dancer2-Plugin-UnicodeNormalize>
 
 All comments and contributions welcome.
 
-=head1 BUGS, SUPPORT
+=head1 BUGS AND SUPPORT
 
-Please direct all requests to http://github.com/jbarrett/Dancer2-Plugin-UnicodeNormalize/issues
+Please direct all requests to L<http://github.com/jbarrett/Dancer2-Plugin-UnicodeNormalize/issues>
 or email <john@jbrt.org>.
 
 =head1 COPYRIGHT

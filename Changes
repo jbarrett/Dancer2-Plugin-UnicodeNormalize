@@ -1,8 +1,12 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.03 2013-11-27
+
+  - Fixes for perls 5.10 - 5.14
+
 0.02 2013-11-26
 
-  - Fix and tests for undefined parameter values - these are now skipped
+  - Fix for undefined parameter values - these are now skipped
 
 0.01 2013-11-26
 
