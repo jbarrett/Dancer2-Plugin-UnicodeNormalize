@@ -3,7 +3,7 @@ use warnings;
 
 package Dancer2::Plugin::UnicodeNormalize;
 {
-    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.03';
+    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.031';
 }
 
 use Dancer2;
@@ -20,7 +20,7 @@ on_plugin_import {
             code => sub {
                 for (@{$settings->{'exclude'}}) { return if $dsl->request->path =~ /$_/ }
 
-                my $form = $settings->{'form'} // 'NFC';
+                my $form = $settings->{'form'} || 'NFC';
                 my $normalizer = Unicode::Normalize->can($form);
 
                 unless ($normalizer) {
@@ -52,7 +52,7 @@ Dancer2::Plugin::UnicodeNormalize - Normalize incoming Unicode parameters
 
 =head1 VERSION
 
-Version 0.03
+Version 0.031
 
 =head1 SYNOPSIS
 

@@ -1,5 +1,9 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.031 2013-11-28
+
+  - Fix for perl 5.8
+
 0.03 2013-11-27
 
   - Fixes for perls 5.10 - 5.14
