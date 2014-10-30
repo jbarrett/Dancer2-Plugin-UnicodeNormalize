@@ -1,5 +1,9 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.032 2014-10-30
+
+  - Migrating tests to Plack::Test from deprecated Dancer2::Test
+
 0.031 2013-11-28
 
   - Fix for perl 5.8
