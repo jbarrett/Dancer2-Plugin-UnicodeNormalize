@@ -1,3 +1,4 @@
 *.swp
 *~
 .build/
+Dancer2-Plugin-UnicodeNormalize-*/
