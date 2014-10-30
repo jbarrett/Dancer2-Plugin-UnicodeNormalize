@@ -6,12 +6,10 @@ use autodie;
 
 use Test::More tests => 2;
 use t::lib::TestApp;
-use Dancer2::Test apps => ['t::lib::TestApp'];
-use Encode;
-use FindBin;
-use Digest::MD5 qw/md5/;
 
-t::lib::TestApp::config->{'charset'} = 'UTF-8';
+use FindBin;
+use Plack::Test;
+use HTTP::Request::Common;
 
 my $files = "$FindBin::Bin/files";
 
@@ -24,11 +22,17 @@ close ($f2);
 
 isnt ($string1,  $string2, "Initial conditions: strings in files not equal");
 
-my $response = dancer_response POST => '/upload', {
-    files => [
-        { filename => "${files}/1.txt", name => "file1" },
-        { filename => "${files}/2.txt", name => "file2" },
-    ]
-};
-is ($response->content, 'ne', "Content in uploaded files should not be normalized");
+test_psgi( t::lib::TestApp::dance, sub {
+    my ($app) = @_;
+
+    my $response = $app->( POST '/upload',
+        Content_Type => 'form-data',
+        Content => [
+            file1 => [ "${files}/1.txt" ],
+            file2 => [ "${files}/2.txt" ],
+        ],
+    );
+
+    is $response->content => 'ne', 'Content in uploaded files should not be normalized';
+} );
 

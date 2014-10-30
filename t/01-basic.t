@@ -6,17 +6,21 @@ use charnames ':full';
 
 use Test::More tests => 3;
 use t::lib::TestApp;
-use Dancer2::Test apps => ['t::lib::TestApp'];
 
-t::lib::TestApp::config->{'charset'} = 'UTF-8';
+use Plack::Test;
+use HTTP::Request::Common;
 
 my $string1 = "\N{LATIN CAPITAL LETTER A}\N{COMBINING ACUTE ACCENT}";
 my $string2 = "\N{LATIN CAPITAL LETTER A WITH ACUTE}";
-
 isnt ($string1, $string2, "Initial conditions: strings are composed differently, are not equal");
 
-response_content_is [ GET => "/cmp/$string1/$string2" ], "eq", "GET: Equality for differently composed strings";
+test_psgi( t::lib::TestApp::dance, sub {
+    my ($app) = @_;
 
-my $response = dancer_response POST => '/cmp', { params => { string1 => $string1, string2 => $string2 } };
-is ($response->content, 'eq', "POST: Equality for differently composed strings");
+    my $response = $app->( GET "/cmp/$string1/$string2" );
+    is $response->content => 'eq', 'GET: Equality for differently composed strings';
+
+    $response = $app->( POST '/cmp', [ string1 => $string1, string2 => $string2 ]);
+    is $response->content => 'eq', 'POST: Equality for differently composed strings';
+} );
 
