@@ -6,7 +6,7 @@ package Dancer2::Plugin::UnicodeNormalize;
     $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.032';
 }
 
-use Dancer2;
+use Dancer2 0.14300;
 use Dancer2::Plugin;
 use Unicode::Normalize;
 
