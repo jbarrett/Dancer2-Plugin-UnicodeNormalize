@@ -1,5 +1,10 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.033 2014-12-11
+
+  - Add minumum required Dancer 2 version and additional metadata
+    (Alexandr Ciornii)
+
 0.032 2014-10-30
 
   - Migrating tests to Plack::Test from deprecated Dancer2::Test
