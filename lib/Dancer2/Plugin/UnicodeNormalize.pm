@@ -12,11 +12,17 @@ use Unicode::Normalize;
 on_plugin_import {
     my $dsl = shift;
 
+    # pre Plugin2 we need to get settings here
+    my $settings = plugin_setting;
     $dsl->app->add_hook(
         Dancer2::Core::Hook->new(
             name => 'before',
             code => sub {
-                my $settings = plugin_setting;
+                # perhaps better ways to check for Plugin2 but this works
+                if ( $dsl->can('execute_plugin_hook')) {
+                    # Plugin2  - fetch fresh config on each run
+                    $settings = plugin_setting;
+                }
                 for (@{$settings->{'exclude'}}) { return if $dsl->request->path =~ /$_/ }
 
                 my $form = $settings->{'form'} || 'NFC';
