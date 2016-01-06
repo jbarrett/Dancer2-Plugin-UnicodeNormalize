@@ -23,7 +23,7 @@ on_plugin_import {
                     # Plugin2  - fetch fresh config on each run
                     $settings = plugin_setting;
                 }
-                for (@{$settings->{'exclude'}}) { return if $dsl->request->path =~ /$_/ }
+                for (@{$settings->{'exclude'}}) { return if $dsl->app->request->path =~ /$_/ }
 
                 my $form = $settings->{'form'} || 'NFC';
                 my $normalizer = Unicode::Normalize->can($form);
@@ -34,11 +34,11 @@ on_plugin_import {
                 }
 
                 for (qw/query body route/) {
-                    my $p = $dsl->request->params($_);
+                    my $p = $dsl->app->request->params($_);
                     next unless $p;
                     %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys %{$p};
                 }
-                $dsl->request->_build_params;
+                $dsl->app->request->_build_params;
             },
         ),
     );
