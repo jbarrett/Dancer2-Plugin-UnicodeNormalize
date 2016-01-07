@@ -6,19 +6,24 @@ package Dancer2::Plugin::UnicodeNormalize;
     $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.033';
 }
 
-use Dancer2 0.14300;
 use Dancer2::Plugin;
 use Unicode::Normalize;
 
 on_plugin_import {
     my $dsl = shift;
-    my $settings = plugin_setting();
 
+    # pre Plugin2 we need to get settings here
+    my $settings = plugin_setting;
     $dsl->app->add_hook(
         Dancer2::Core::Hook->new(
             name => 'before',
             code => sub {
-                for (@{$settings->{'exclude'}}) { return if $dsl->request->path =~ /$_/ }
+                # perhaps better ways to check for Plugin2 but this works
+                if ( $dsl->can('execute_plugin_hook')) {
+                    # Plugin2  - fetch fresh config on each run
+                    $settings = plugin_setting;
+                }
+                for (@{$settings->{'exclude'}}) { return if $dsl->app->request->path =~ /$_/ }
 
                 my $form = $settings->{'form'} || 'NFC';
                 my $normalizer = Unicode::Normalize->can($form);
@@ -29,11 +34,11 @@ on_plugin_import {
                 }
 
                 for (qw/query body route/) {
-                    my $p = $dsl->request->params($_);
+                    my $p = $dsl->app->request->params($_);
                     next unless $p;
                     %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys %{$p};
                 }
-                $dsl->request->_build_params;
+                $dsl->app->request->_build_params;
             },
         ),
     );

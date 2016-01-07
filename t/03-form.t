@@ -18,19 +18,19 @@ my $string = "\N{OHM SIGN}\N{GREEK CAPITAL LETTER OMEGA}\N{LATIN CAPITAL LETTER 
 test_psgi( t::lib::TestApp::dance, sub {
     my ($app) = @_;
 
-    t::lib::TestApp::config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFD';
+    t::lib::TestApp::app->config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFD';
     my $response = $app->(GET "/form/$string");
     is (decode('UTF-8', $response->content), NFD($string), "NFD form returned");
 
-    t::lib::TestApp::config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFC';
+    t::lib::TestApp::app->config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFC';
     $response = $app->(GET "/form/$string");
     is (decode('UTF-8', $response->content), NFC($string), "NFC form returned");
 
-    t::lib::TestApp::config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFKD';
+    t::lib::TestApp::app->config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFKD';
     $response = $app->(GET "/form/$string");
     is (decode('UTF-8', $response->content), NFKD($string), "NFKD form returned");
 
-    t::lib::TestApp::config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFKC';
+    t::lib::TestApp::app->config->{'plugins'}->{'UnicodeNormalize'}->{'form'} = 'NFKC';
     $response = $app->(GET "/form/$string");
     is (decode('UTF-8', $response->content), NFKC($string), "NFKC form returned");
 
