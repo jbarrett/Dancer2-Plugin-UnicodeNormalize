@@ -1,5 +1,9 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.034 2016-06-09
+
+  - Fixing build for Dancer 0.200000 (Peter Mottram, Sawyer X)
+
 0.033 2014-12-11
 
   - Add minumum required Dancer 2 version and additional metadata
