@@ -40,6 +40,15 @@ on_plugin_import {
                     %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys %{$p};
                 }
                 $app->request->_build_params;
+
+                if ( $app->request->can("body_parameters") ) {
+                    for (qw/query_parameters body_parameters route_parameters/) {
+                        my $p = $app->request->$_;
+                        for my $key ( $p->keys ) {
+                            $p->set( $key, map { $_ ? $normalizer->($_) : $_} $p->get_all($key) );
+                        }
+                    }
+                }
             },
         ),
     );
