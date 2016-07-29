@@ -18,12 +18,13 @@ on_plugin_import {
         Dancer2::Core::Hook->new(
             name => 'before',
             code => sub {
+                my $app = shift;
                 # perhaps better ways to check for Plugin2 but this works
                 if ( $dsl->can('execute_plugin_hook')) {
                     # Plugin2  - fetch fresh config on each run
                     $settings = plugin_setting;
                 }
-                for (@{$settings->{'exclude'}}) { return if $dsl->app->request->path =~ /$_/ }
+                for (@{$settings->{'exclude'}}) { return if $app->request->path =~ /$_/ }
 
                 my $form = $settings->{'form'} || 'NFC';
                 my $normalizer = Unicode::Normalize->can($form);
@@ -34,11 +35,11 @@ on_plugin_import {
                 }
 
                 for (qw/query body route/) {
-                    my $p = $dsl->app->request->params($_);
+                    my $p = $app->request->params($_);
                     next unless $p;
                     %{$p} = map { $_ => $normalizer->($p->{$_}) } grep { $p->{$_} } keys %{$p};
                 }
-                $dsl->app->request->_build_params;
+                $app->request->_build_params;
             },
         ),
     );
