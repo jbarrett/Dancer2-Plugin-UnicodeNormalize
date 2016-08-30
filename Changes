@@ -1,5 +1,10 @@
 Revision history for perl module Dancer2::Plugin::UnicodeNormalize
 
+0.04 2016-08-30
+
+  - Add support for Dancer2's new Hash::MultiValue parameters methods
+    (Peter Mottram)
+
 0.034 2016-06-09
 
   - Fixing build for Dancer 0.200000 (Peter Mottram, Sawyer X)

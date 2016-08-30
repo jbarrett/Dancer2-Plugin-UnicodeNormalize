@@ -3,7 +3,7 @@ use warnings;
 
 package Dancer2::Plugin::UnicodeNormalize;
 {
-    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.034';
+    $Dancer2::Plugin::UnicodeNormalize::VERSION = '0.04';
 }
 
 use Dancer2::Plugin 0.202000;
@@ -67,7 +67,7 @@ Dancer2::Plugin::UnicodeNormalize - Normalize incoming Unicode parameters
 
 =head1 VERSION
 
-Version 0.034
+Version 0.04
 
 =head1 SYNOPSIS
 
