@@ -81,11 +81,6 @@ silently before processing each route. By default, we use Unicode Normalization
 Form C - this is usually what you want. Other forms can be selected, see:
 L</"CONFIGURATION">.
 
-B<** NOTE **> This has been updated to build against Dancer2 0.200000 but
-operations do not yet apply to newer parameter access methods, query_parameters,
-body_parameters and route_parameters. This will be fixed in the next release.
-
-
 This plugin was inspired by L<Mojolicious::Plugin::UnicodeNormalize>. For
 information on why Unicode Normalization is important, please see:
 
